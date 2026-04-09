@@ -15,9 +15,11 @@ function TimerWidget() {
   const [elapsed, setElapsed] = useState(0)
   const [countdownMinutes, setCountdownMinutes] = useState(DEFAULT_COUNTDOWN_MINUTES)
   const [remaining, setRemaining] = useState(DEFAULT_COUNTDOWN_MINUTES * 60)
+  const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
     if (!isRunning) return
+
     const interval = setInterval(() => {
       if (mode === 'countup') {
         setElapsed((prev) => prev + 1)
@@ -31,13 +33,13 @@ function TimerWidget() {
         })
       }
     }, 1000)
+
     return () => clearInterval(interval)
   }, [isRunning, mode])
 
   useEffect(() => {
     if (mode === 'countdown') {
-      const totalSeconds = Math.max(1, countdownMinutes) * 60
-      setRemaining(totalSeconds)
+      setRemaining(Math.max(1, countdownMinutes) * 60)
     }
   }, [countdownMinutes, mode])
 
@@ -48,11 +50,13 @@ function TimerWidget() {
   const toggleMode = (selectedMode) => {
     if (selectedMode === mode) return
     setIsRunning(false)
+
     if (selectedMode === 'countup') {
       setElapsed(0)
     } else {
       setRemaining(Math.max(1, countdownMinutes) * 60)
     }
+
     setMode(selectedMode)
   }
 
@@ -67,47 +71,64 @@ function TimerWidget() {
   }
 
   return (
-    <section className="timer-widget" aria-live="polite">
-      <div className="timer-header">
-        <p className="eyebrow">Timer</p>
-        <strong>{displayTime}</strong>
-      </div>
-      <div className="timer-controls">
-        <button
-          type="button"
-          className={mode === 'countup' ? 'chip active' : 'chip'}
-          onClick={() => toggleMode('countup')}
-        >
-          Chrono
-        </button>
-        <button
-          type="button"
-          className={mode === 'countdown' ? 'chip active' : 'chip'}
-          onClick={() => toggleMode('countdown')}
-        >
-          Compte à rebours
-        </button>
-      </div>
-      {mode === 'countdown' && (
-        <label className="timer-input">
-          Durée (minutes)
-          <input
-            type="number"
-            min="1"
-            max="60"
-            value={countdownMinutes}
-            onChange={(event) => setCountdownMinutes(Number(event.target.value) || 1)}
-          />
-        </label>
+    <section className={`timer-widget ${isOpen ? 'open' : 'closed'}`} aria-live="polite">
+      <button
+        type="button"
+        className="timer-toggle"
+        onClick={() => setIsOpen((prev) => !prev)}
+      >
+        {isOpen ? 'Masquer le chrono' : `⏱ ${displayTime}`}
+      </button>
+
+      {isOpen && (
+        <>
+          <div className="timer-header">
+            <p className="eyebrow">Timer</p>
+            <strong>{displayTime}</strong>
+          </div>
+
+          <div className="timer-controls">
+            <button
+              type="button"
+              className={mode === 'countup' ? 'chip active' : 'chip'}
+              onClick={() => toggleMode('countup')}
+            >
+              Chrono
+            </button>
+
+            <button
+              type="button"
+              className={mode === 'countdown' ? 'chip active' : 'chip'}
+              onClick={() => toggleMode('countdown')}
+            >
+              Compte à rebours
+            </button>
+          </div>
+
+          {mode === 'countdown' && (
+            <label className="timer-input">
+              Durée (minutes)
+              <input
+                type="number"
+                min="1"
+                max="60"
+                value={countdownMinutes}
+                onChange={(event) => setCountdownMinutes(Number(event.target.value) || 1)}
+              />
+            </label>
+          )}
+
+          <div className="timer-actions">
+            <button type="button" className="primary" onClick={handleToggle}>
+              {isRunning ? 'Pause' : 'ON'}
+            </button>
+
+            <button type="button" className="ghost" onClick={handleReset}>
+              Reset
+            </button>
+          </div>
+        </>
       )}
-      <div className="timer-actions">
-        <button type="button" className="primary" onClick={handleToggle}>
-          {isRunning ? 'Stop' : 'ON'}
-        </button>
-        <button type="button" className="ghost" onClick={handleReset} disabled={isRunning}>
-          Reset
-        </button>
-      </div>
     </section>
   )
 }
