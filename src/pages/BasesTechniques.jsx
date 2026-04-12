@@ -37,7 +37,7 @@ function BasesTechniques() {
         <article className="panel">
           <h3>Placements 1</h3>
           <img
-            src="/images/bases-placements-1.png" {/* ✅ corrigé */}
+            src="/images/bases-placements-1.png"
             alt="Placements 1"
             className="bases-image"
             onClick={() => setSelectedImage('/images/bases-placements-1.png')}
@@ -47,7 +47,7 @@ function BasesTechniques() {
         <article className="panel">
           <h3>Placements 2</h3>
           <img
-            src="/images/bases-placements-2.png" {/* ✅ corrigé */}
+            src="/images/bases-placements-2.png"
             alt="Placements 2"
             className="bases-image"
             onClick={() => setSelectedImage('/images/bases-placements-2.png')}
@@ -65,10 +65,9 @@ function BasesTechniques() {
         </article>
       </div>
 
-      {/* 🔥 MODAL ZOOM */}
       {selectedImage && (
         <div className="image-modal" onClick={() => setSelectedImage(null)}>
-          <img src={selectedImage} alt="zoom" />
+          <img src={selectedImage} alt="Zoom" />
         </div>
       )}
     </section>
