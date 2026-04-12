@@ -4,6 +4,7 @@ import Home from './pages/Home.jsx'
 import ProblemList from './pages/ProblemList.jsx'
 import ProblemDetail from './pages/ProblemDetail.jsx'
 import ExerciseDetail from './pages/ExerciseDetail.jsx'
+import BasesTechniques from './pages/BasesTechniques.jsx'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/problemes" element={<ProblemList />} />
           <Route path="/problemes/:slug" element={<ProblemDetail />} />
           <Route path="/exercices/:slug" element={<ExerciseDetail />} />
+          <Route path="/bases-techniques" element={<BasesTechniques />} />
           <Route path="*" element={<Home />} />
         </Route>
       </Routes>
