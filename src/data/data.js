@@ -795,7 +795,7 @@ export const problematics = [
           "Être prêt à enchainer des coups d’attaque après le smash en cas de défense haute."
         ],
         "page": 45,
-        "image": "/images/45-routine-en-vitesse.png"
+        "image": "/images/45-routine-en-vitesse-page.png"
       },
       {
         "title": "Bonus vitesse",
