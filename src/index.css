@@ -235,133 +235,7 @@ button.large {
   color: var(--text);
 }
 
-/* TIMER CORRIGÉ */
-.timer-widget {
-  position: fixed;
-  right: 16px;
-  bottom: 16px;
-  z-index: 30;
-  max-width: 260px;
-}
-
-.timer-widget.closed {
-  background: transparent;
-  box-shadow: none;
-  padding: 0;
-  width: auto;
-}
-
-.timer-widget.open {
-  background: #0f172a;
-  color: white;
-  padding: 0.9rem 1rem;
-  border-radius: 18px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
-  width: min(260px, calc(100vw - 32px));
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.timer-toggle {
-  border-radius: 999px;
-  background: #0f172a;
-  color: white;
-  border: none;
-  padding: 0.65rem 1rem;
-  font-size: 0.95rem;
-  min-width: 120px;
-}
-
-.timer-header {
-  margin-top: 0.25rem;
-}
-
-.timer-header strong {
-  font-size: 1.8rem;
-  letter-spacing: 0.08em;
-}
-
-.timer-controls {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
-.chip {
-  flex: 1;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  background: transparent;
-  color: inherit;
-  padding: 0.4rem 0.8rem;
-}
-
-.chip.active {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.timer-input {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  font-size: 0.85rem;
-}
-
-.timer-input input {
-  border-radius: 10px;
-  border: none;
-  padding: 0.4rem 0.6rem;
-  font-size: 1rem;
-}
-
-.timer-actions {
-  display: flex;
-  gap: 0.75rem;
-}
-
-.timer-actions .primary {
-  flex: 1;
-}
-
-.timer-actions .ghost {
-  color: #fff;
-  border-color: rgba(255, 255, 255, 0.4);
-}
-
-.hero-panel p {
-  max-width: 60ch;
-}
-
-@media (max-width: 768px) {
-  .app-header {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .exercise-card {
-    flex-direction: column;
-  }
-
-  .exercise-media {
-    max-width: 100%;
-    min-height: 180px;
-  }
-
-  .timer-widget {
-    right: 12px;
-    bottom: 12px;
-    max-width: 220px;
-  }
-
-  .timer-widget.open {
-    width: min(220px, calc(100vw - 24px));
-  }
-
-  .timer-header strong {
-    font-size: 1.5rem;
-  }
-}
+/* HOME */
 .home-actions {
   display: flex;
   gap: 1rem;
@@ -379,6 +253,7 @@ button.large {
   max-width: 420px;
 }
 
+/* BASES TECHNIQUES */
 .bases-grid {
   display: grid;
   gap: 1.5rem;
@@ -392,4 +267,45 @@ button.large {
   border: 1px solid var(--border);
   margin-top: 0.75rem;
   background: #fff;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.bases-image:hover {
+  transform: scale(1.03);
+}
+
+/* 🔥 ZOOM IMAGE */
+.image-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  cursor: zoom-out;
+}
+
+.image-modal img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 12px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .app-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .exercise-card {
+    flex-direction: column;
+  }
+
+  .exercise-media {
+    max-width: 100%;
+    min-height: 180px;
+  }
 }
